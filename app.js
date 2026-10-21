@@ -44,27 +44,47 @@
   };
   document.querySelector('#copy-citation').addEventListener('click', () => copy(document.querySelector('#citation-text').textContent, t('Citation copied', '引用已复制')));
   document.querySelector('#copy-email').addEventListener('click', () => copy('maple_v@sjtu.edu.cn', t('Email copied', '邮箱已复制')));
-  document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
+  document.querySelectorAll('[data-lang]').forEach(button => button.addEventListener('click', () => { setLanguage(button.dataset.lang); if (window.matchMedia('(max-width:700px)').matches) setMenu(false); }));
   menu.addEventListener('click', () => setMenu(menu.getAttribute('aria-expanded') !== 'true'));
   document.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('pointerdown', event => { if (navigation.classList.contains('open') && !document.querySelector('.header').contains(event.target)) setMenu(false); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape' && navigation.classList.contains('open')) { setMenu(false); menu.focus(); } });
   window.matchMedia('(min-width:701px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
   const links = [...document.querySelectorAll('nav a')];
   if ('IntersectionObserver' in window) { const observer = new IntersectionObserver(entries => { const entry = entries.find(item => item.isIntersecting); if (entry) links.forEach(link => link.classList.toggle('active', link.hash === '#' + entry.target.id)); }, {rootMargin:'-15% 0px -65% 0px'}); ['about','research','experience','contact'].forEach(id => observer.observe(document.getElementById(id))); }
+  const mobileLayout = window.matchMedia('(max-width:700px)');
+  const interestsToggle = document.querySelector('.interests-toggle');
+  const interestsList = document.querySelector('#interest-list');
+  const interestsLabel = document.querySelector('.interests .sidebar-label');
+  const setInterests = open => {
+    interestsList.hidden = !open;
+    interestsToggle.setAttribute('aria-expanded', String(open));
+    interestsToggle.querySelector('.interest-chevron').textContent = open ? '−' : '+';
+  };
+  const syncInterests = () => {
+    interestsToggle.hidden = !mobileLayout.matches;
+    interestsLabel.hidden = mobileLayout.matches;
+    setInterests(!mobileLayout.matches);
+  };
+  interestsToggle.addEventListener('click', () => setInterests(interestsList.hidden));
+  mobileLayout.addEventListener('change', syncInterests);
+  syncInterests();
   setLanguage(language);
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const activeAnimations = new Set();
   const enter = (element, delay = 0) => {
-    if (reducedMotion.matches || !element.animate) return;
+    if (reducedMotion.matches || !element.animate || element.hidden) return;
+    const bounds = element.getBoundingClientRect();
+    if (bounds.bottom <= 0 || bounds.top >= document.documentElement.clientHeight) return;
     const animation = element.animate([
-      {opacity:0, transform:'translateY(14px)'},
+      {opacity:.65, transform:'translateY(8px)'},
       {opacity:1, transform:'translateY(0)'}
-    ], {duration:560, delay, easing:'cubic-bezier(.2,.75,.3,1)', fill:'backwards'});
+    ], {duration:420, delay, easing:'cubic-bezier(.2,.75,.3,1)', fill:'backwards'});
     activeAnimations.add(animation);
     animation.finished.catch(() => {}).finally(() => activeAnimations.delete(animation));
   };
   ['.profile-inner', '.intro'].forEach(selector => {
-    [...document.querySelector(selector).children].forEach((element, index) => enter(element, index * 65));
+    [...document.querySelector(selector).children].forEach((element, index) => enter(element, index * 40));
   });
   let revealObserver;
   if ('IntersectionObserver' in window && !reducedMotion.matches) {

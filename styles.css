@@ -26,3 +26,55 @@ dialog[open]{animation:dialog-enter .24s cubic-bezier(.2,.75,.3,1) both}
 @keyframes dialog-enter{from{opacity:0;transform:translateY(10px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes toast-enter{from{opacity:0;translate:0 7px}to{opacity:1;translate:0 0}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.paper-media:hover img,.research-item:hover .paper-media img,.project-item:hover .project-arrow,.profile-links a:hover .icon,.paper-actions a:hover .icon,.paper-actions a:hover>span:last-child,.profile-links a:hover>span:last-child{transform:none}}
+.headline-line{display:block;text-wrap:balance}
+.profile-detail span,.nowrap{white-space:nowrap}
+.interests-toggle{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:44px;text-align:left;color:var(--muted);font-size:13px}
+.interest-chevron{font-size:19px;font-weight:400;color:var(--blue);padding-right:3px}
+.dialog-header{position:sticky;top:-1px;z-index:2;background:white;padding-bottom:12px}
+.close-dialog{min-width:44px;min-height:44px;display:grid;place-items:center;flex-shrink:0}
+.filters button{min-height:42px}
+.dialog-links a,.dialog-links button{display:inline-flex;align-items:center;min-height:44px}
+.cv-nav a,.cv-nav button{display:inline-flex;align-items:center;min-height:44px}
+@media(max-width:700px){
+  .brand{display:inline-flex;align-items:center;min-height:44px}
+  .layout{padding-top:22px}
+  .profile{padding-bottom:13px}
+  .profile-inner{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:0 15px}
+  .profile-name{grid-row:auto}
+  .affiliation{font-size:13px}
+  .profile-detail{font-size:12px;line-height:1.7}
+  .profile-links{grid-column:1/-1;margin-top:9px;gap:24px}
+  .profile-links a{font-size:13px;min-height:44px;gap:8px}
+  .profile-links .icon{width:17px;height:17px}
+  .interests{margin-top:13px;padding-top:6px}
+  .interests ul{margin:8px 0 12px;gap:7px 17px}
+  .interests li{font-size:12px;line-height:1.7}
+  .intro{padding-top:25px}
+  .intro h2{font-size:clamp(25px,7.2vw,37px)}
+  .intro-copy{font-size:15px;line-height:1.8;text-wrap:pretty}
+  .topic-links{gap:0 20px;margin-top:12px}
+  .topic-links a{font-size:12px;min-height:44px}
+  .section-heading{flex-wrap:wrap;gap:3px 16px;align-items:center}
+  .section-heading h2{max-width:100%;min-width:0}
+  .blue-link{font-size:12px;display:inline-flex;align-items:center;min-height:44px}
+  .research-copy .authors,.venue{font-size:13px}
+  .research-summary,.background-copy p,.contact-section>p{font-size:14px;line-height:1.8}
+  .paper-actions{gap:20px}
+  .paper-actions a,.citation-trigger{min-height:44px}
+  .citation-trigger{min-width:44px;text-align:right;font-size:12px}
+  .project-item .research-copy h3 a{display:inline-block;padding:6px 0}
+  .project-arrow{min-width:44px;min-height:44px;display:grid;place-items:center;padding:0;top:12px}
+  .contact-links a,.contact-links button{min-height:44px}
+  .contact-links a{font-size:13px}
+  .contact-links button{font-size:12px}
+  footer{align-items:center;font-size:11px}
+  footer a{min-height:44px;display:inline-flex;align-items:center}
+  .languages button{min-height:44px;min-width:44px}
+  .navigation nav a{min-height:44px}
+  .dialog-work>p:not(.eyebrow){font-size:14px}
+  .filters button{min-height:44px}
+  .citation-heading{align-items:center}
+  .citation-heading button{min-height:44px;min-width:44px}
+  .citation pre{font-size:12px;line-height:1.7}
+}
+@media(prefers-reduced-motion:no-preference){.filters button:active,.menu-button:active,.close-dialog:active,.interests-toggle:active{transform:scale(.98)}}
