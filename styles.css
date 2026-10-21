@@ -31,6 +31,7 @@ dialog[open]{animation:dialog-enter .24s cubic-bezier(.2,.75,.3,1) both}
 .interests-toggle{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;min-height:44px;text-align:left;color:var(--muted);font-size:13px}
 .interest-chevron{font-size:19px;font-weight:400;color:var(--blue);padding-right:3px}
 .dialog-header{position:sticky;top:-1px;z-index:2;background:white;padding-bottom:12px}
+.dialog-header::before{content:'';position:absolute;inset:-32px -38px 0;z-index:-1;background:white;pointer-events:none}
 .close-dialog{min-width:44px;min-height:44px;display:grid;place-items:center;flex-shrink:0}
 .filters button{min-height:42px}
 .dialog-links a,.dialog-links button{display:inline-flex;align-items:center;min-height:44px}
@@ -73,6 +74,7 @@ dialog[open]{animation:dialog-enter .24s cubic-bezier(.2,.75,.3,1) both}
   .navigation nav a{min-height:44px}
   .dialog-work>p:not(.eyebrow){font-size:14px}
   .filters button{min-height:44px}
+  .dialog-header::before{inset:-23px -20px 0}
   .citation-heading{align-items:center}
   .citation-heading button{min-height:44px;min-width:44px}
   .citation pre{font-size:12px;line-height:1.7}
